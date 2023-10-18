@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         if _userDefault.get(key: kDeviceToken) != nil {
-            window?.switchToWelcomScreen()
+          //  window?.switchToWelcomScreen()
+            window?.switchToPasscodeScreen()
         } else {
             print("Need to check")
         }
@@ -157,6 +158,22 @@ extension UIWindow {
         let controller = storyBoard.instantiateViewController(withIdentifier: "WelcomeVC") as! WelcomeVC
         let leftViewController = storyBoard.instantiateViewController(withIdentifier: "MenuNavigation") as! MenuViewController
         let navigationController  = UINavigationController(rootViewController: controller)
+        navigationController.navigationBar.isHidden = true
+        let slideMenuController = SideMenuController(contentViewController: navigationController, menuViewController: leftViewController)
+        rootViewController = slideMenuController
+        makeKeyAndVisible()
+    }
+    
+    func switchToPasscodeScreen() {
+        let userData = _userDefault.get(key: "user_details") as! Dictionary<String, Any>
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let passcodeVC = storyBoard.instantiateViewController(withIdentifier: "PasscodeView") as! PasscodeView
+        let firstName = userData["first_name"] as? String
+        let lastName = userData["last_name"] as? String
+        passcodeVC.userName = (firstName ?? "")  + " " + (lastName ?? "")
+        passcodeVC.isFromHome = true
+        let leftViewController = storyBoard.instantiateViewController(withIdentifier: "MenuNavigation") as! MenuViewController
+        let navigationController  = UINavigationController(rootViewController: passcodeVC)
         navigationController.navigationBar.isHidden = true
         let slideMenuController = SideMenuController(contentViewController: navigationController, menuViewController: leftViewController)
         rootViewController = slideMenuController
