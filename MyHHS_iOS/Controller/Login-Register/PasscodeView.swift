@@ -155,7 +155,12 @@ class PasscodeView: UIViewController {
         )
         // Create and configure the label
         let messageLabel = UILabel()
-        messageLabel.text = "Welcome \(userName)"
+        if isFromHome == true {
+            messageLabel.text = "Last logged in as \(userName)"
+        } else {
+            messageLabel.text = "Welcome \(userName)"
+        }
+        
         messageLabel.textColor = UIColor(red: 24/255, green: 63/255, blue: 96/255, alpha: 1.0) // Set your desired custom text color
         messageLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         messageLabel.textAlignment = .center
