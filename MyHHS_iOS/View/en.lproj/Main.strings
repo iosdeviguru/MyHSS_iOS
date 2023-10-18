@@ -1,0 +1,24 @@
+
+/* Class = "UIButton"; normalTitle = "Forgot Password?"; ObjectID = "Bgg-i0-SSk"; */
+"Bgg-i0-SSk.normalTitle" = "Forgot Password?";
+
+/* Class = "UILabel"; text = "I already have a membership! Login"; ObjectID = "Nbu-pO-WI1"; */
+"Nbu-pO-WI1.text" = "I already have a membership! Login";
+
+/* Class = "UILabel"; text = "Don’t have any account? Register!"; ObjectID = "Pt2-sV-FiI"; */
+"Pt2-sV-FiI.text" = "Don’t have any account? Register!";
+
+/* Class = "UILabel"; text = "Register A New Membership"; ObjectID = "iyG-cI-SJS"; */
+"iyG-cI-SJS.text" = "Register A New Membership";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "o3Q-7N-n0A"; */
+"o3Q-7N-n0A.normalTitle" = "Register";
+
+/* Class = "UILabel"; text = "Agree to the HSS (UK) Privacy Policy and the MyHss Terms & Conditions"; ObjectID = "oBA-Lf-GvN"; */
+"oBA-Lf-GvN.text" = "Agree to the HSS (UK) Privacy Policy and the MyHss Terms & Conditions";
+
+/* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "t3y-sT-T3K"; */
+"t3y-sT-T3K.normalTitle" = "Sign in";
+
+/* Class = "UILabel"; text = "OR"; ObjectID = "tZ4-rL-9uc"; */
+"tZ4-rL-9uc.text" = "OR";

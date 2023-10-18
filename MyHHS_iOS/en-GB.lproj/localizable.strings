@@ -1,0 +1,172 @@
+/* 
+  localizable.s
+  MyHHS_iOS
+
+  Created by baps on 24/06/2019 jun.
+  
+*/
+
+ "SPLASH_SCREEN" = "SPLASH_SCREEN";
+   "LOGIN_SCREEN" = "LOGIN_SCREEN";
+   "REGISTRATION_SCREEN" = "REGISTRATION_SCREEN";
+   "HOME_SCREEN" = "HOME_SCREEN";
+   "DASHBOARD" = "DASHBOARD";
+   "WELCOME" = "WELCOME";
+   "WELCOMEPAGE" = "WELCOMEPAGE";
+   "PROFILEPAGE" = "PROFILEPAGE";
+
+   "AddMemberStep1" = "AddMemberStep1";
+   "AddMemberStep2" = "AddMemberStep2";
+   "AddMemberStep3" = "AddMemberStep3";
+   "AddMemberStep4" = "AddMemberStep4";
+   "SearchPage" = "SearchPage";
+
+ //Check or uncheck
+   "Checkbox_is_CHECKED" = "Checkbox is CHECKED";
+   "Checkbox_is_UN_CHECKED" = "Checkbox is UN-CHECKED";
+
+  //App Name
+   "app_name" = "HSS";
+
+   "appcamera" = "CAMERA";
+   "appgallery" = "GALLERY";
+   "appsel_img" = "Select Image from";
+
+  //Dashboard Tab
+   "my_family" = "My Family";
+   "kendriya" = "Kendriya";
+   "support" = "Support";
+   "my_shakha" = "My Shakha";
+   "my_nagar" = "My Nagar";
+   "my_vibhag" = "My Vibhag";
+
+  /*Drawer Name*/
+   "home_name" = "Home";
+   "organistion_name" = "Organisation";
+   "shakha_name" = "Shakha";
+   "shakha_type_name" = "Shakha Tpe";
+   "role_name" = "Role";
+   "role_resposiblity_name" = "Role & Responsibility";
+   "karyakartas_name" = "Karyakartas";
+   "sankhya_name" = "Sankhya Report";
+   "settings_name" = "Settings";
+   "policies_name" = "Policies";
+   "logout_name" = "Logout";
+
+ //Login Page
+  "google" = "Google";
+   "facebook" = "Facebook";
+
+   "or_text" = "Or";
+   "email_address" = "Email address";
+   "password" = "Password";
+   "forgot_password" = "Forgot password?";
+   "sign_in" = "Sign In";
+   "full_name" = "Full name";
+   "username" = "Username";
+   "email_mobile" = "Email address/Mobile no.";
+   "confirm_password" = "Confirm password";
+   "register" = "Register";
+   "already_user" = "I already have a membership! ";
+   "terms_condtion" = "Agree to the Hss (UK) Privacy Policy and the MyHss Terms & Conditions";
+   "forgot_your_password" = "Forgot your password ? ";
+   "submit" = "Submit";
+   "dont_have_account" = "Don't have any account ? ";
+   "login" = "Login";
+   "login_in" = "Log In";
+   "welocome" = "Welcome";
+   "heading_AddMembers" = "Add Members";
+   "Personal_Info" = "Personal Infomation";
+   "enter_Fullname" = "Enter Fullname";
+   "fullname" = "Fullname";
+   "gender" = "Gender";
+   "male" = "Male";
+   "female" = "Female";
+   "dateofbirth" = "Date of birth";
+   "dd_mm_yyyy" = "DD / MM / YYYY";
+   "ageTipText" = "As your age is below 18, we will send one email to your guardian for the approval purpose.";
+   "select_occupation" = "Select Occupation";
+   "occupation_name" = "Occupation Name";
+   "occupation_select_other" = "Occupation (Select Other if not listed)";
+   "select_vibhag" = "Select Vibhag";
+   "vibhag_region" = "Vibhag (Region)";
+   "select_nagar" = "Select Nagar";
+   "nagar_town" = "Nagar (Town)";
+   "select_sakha" = "Select Sakha";
+   "sakha_branch" = "Sakha (Branch)";
+   "next" = "Next";
+   "Ok" = "Ok";
+   "Success" = "Success";
+   "prev" = "Prev";
+   "guardian_information" = "Guardian Information";
+   "guardian_name" = "Guardian Name";
+   "guardian_full_name" = "Guardian  full name";
+   "guardian_contact_number" = "Guardian  contact number";
+   "guardian_email" = "Guardian Email";
+   "guardian_relationship" = "Guardian Relationship";
+   "FIND_ADDRESS" = "FIND ADDRESS";
+
+  //Dashboard
+   "Add_self" = "Add Self";
+   "Add_family_member" = "Add Family Member";
+   "welocome_text_mag" = "You are not currently a member of MyHSS. If you are experiencing an issue, please contact your Shakha Admin.";
+   "welcome_msg" = "We have recived your membership application. we will update you shortly.";
+
+  //Add member Step 2
+   "contact_information" = "Contact Information";
+   "primary_contact_number" = "Primary contact number";
+   "secondary_contact_number" = "Secondary contact number";
+   "find_address" = "FIND ADDRESS";
+   "whats_your_postcode" = "What’s your postcode?";
+   "select_address" = "Select Address";
+   "building_name" = "Building Name";
+   "address_line1" = "Address Line 1";
+   "address_line2" = "Address Line 2";
+   "town_city" = "Town/City";
+
+   "error_Please_enter_name_text" = "Please enter name text";
+   "error_Please_enter_full_name" = "Please enter full name text";
+   "error_Please_choose_gender" = "Please choose gender";
+   "error_Please_choose_date_of_birth" = "Plase choose date of birth";
+   "error_Please_enter_occupation" = "Please enter occupation";
+   "error_Please_select_vibhag" = "Please select vibhag";
+   "error_Please_select_nagar" = "Please select nagar";
+   "error_Please_select_shakha" = "Please select shakha";
+
+  //  Add Member Step3
+   "error_please_choose_medical_information" = "Please choose any medical information to declare?";
+   "error_please_choose_qualified_first_aid" = "Please choose qualified in first aid?";
+   "error_please_enter_medical_information" = "Please enter medical information details";
+   "error_please_choose_date_qualified_first_aid" = "Please choose date of first aid qualification";
+   "error_please_choose_file_qualified_first_aid" = "Please choose qualification file";
+   "error_please_choose_HSS_membership_agreement" = "Please choose HSS (UK) membership agreement.";
+   "error_please_enter_emergency_contact_name" = "Please enter emergency contact name";
+   "error_please_enter_emergency_contact_number" = "Please enter emergency contact number";
+   "error_please_enter_contact_email" = "Please enter contact email";
+   "error_please_select_relationship" = "Please select relationship";
+   "error_Please_enter_email" = "Please enter email";
+   "error_Please_enter_valid_email" = "Please enter valid email";
+
+
+  //Add member Step 4
+   "other_information" = "Other Information";
+   "do_you_have_medical_information" = "Do you have any medical information to declare? (including any allergies)";
+   "do_you_have_qualification_First_Aid" = "Do you have a qualification in First Aid?";
+   "yes" = "Yes";
+   "no" = "No";
+   "special_dietary_requirements" = "Special Dietary Requirements";
+   "spoken_language" = "Spoken Language(s)";
+   "originating_state_in_india" = "Originating State in India";
+   "aggre_text_step4_text" = "I am agreeing to the";
+   "aggre_text_step4_link" = " HSS (UK) Membership Agreement";
+   "medical_information_details" = "Medical Information Details   (including any allergies)";
+   "date_of_first_aid_qualification" = "Date of First Aid Qualification";
+   "qualification_file" = "Qualification File";
+   "mimes_type" = "mimes type: jpg, jpeg, png, pdf";
+
+
+  //Registration Success
+   "Please_check_your_email" = "Please check your email ";
+   "shobha_com" = "shobha@gmail.com ";
+   "to_verify_your_account" = "to verify your account.";
+   "cancel" = "Cancel";
