@@ -477,7 +477,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XC-TY-UT4">
-                                        <rect key="frame" x="0.0" y="-50" width="414" height="1074"/>
+                                        <rect key="frame" x="0.0" y="-60" width="414" height="1074"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOB-ob-E87">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -852,7 +852,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0XC-TY-UT4" firstAttribute="bottom" secondItem="NXf-Z4-TRw" secondAttribute="bottom" id="5Ku-iA-7CU"/>
-                                    <constraint firstItem="0XC-TY-UT4" firstAttribute="top" secondItem="NXf-Z4-TRw" secondAttribute="top" constant="-50" id="FC8-Vr-lJR"/>
+                                    <constraint firstItem="0XC-TY-UT4" firstAttribute="top" secondItem="NXf-Z4-TRw" secondAttribute="top" constant="-60" id="FC8-Vr-lJR"/>
                                     <constraint firstItem="0XC-TY-UT4" firstAttribute="leading" secondItem="gCT-uY-J8Z" secondAttribute="leading" id="OIs-k9-Otb"/>
                                     <constraint firstItem="0XC-TY-UT4" firstAttribute="leading" secondItem="NXf-Z4-TRw" secondAttribute="leading" id="TDR-Mg-fhA"/>
                                     <constraint firstItem="0XC-TY-UT4" firstAttribute="trailing" secondItem="NXf-Z4-TRw" secondAttribute="trailing" id="TcO-Qb-1eT"/>

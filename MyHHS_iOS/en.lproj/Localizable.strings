@@ -75,10 +75,11 @@
  //Login Page
   "google" = "Google";
    "facebook" = "Facebook";
-"Register_New_Membership" = "Register A New Membership";
+"Register_New_Membership" = "Register";
+"first_name" = "First Name";
 "Dont_have_any_account" = "Don’t have any account? Register!";
-"U_name_hint_text" = "Usernames should be something memorable e.g. firstname.surname. These can contain letters and numbers only (no spaces).";
-"PWD_hint_text" = "Please use 8 or more characters with a mix of letters, numbers & symbols.";
+"U_name_hint_text" = "Usernames should be something memorable e.g. Firstname Surname. These can contain letters and numbers only (no spaces & no spacial characters).";
+"PWD_hint_text" = "Please use 8 or more characters with a mix of letters, numbers & symbols. e.g.Abcd@123";
 "register_agree_text" = "Choosing Register means that you agree to the HSS (UK) Privacy Policy and the MyHSS Terms & Conditions.";
 "PrivacyPolicy" = "Privacy Policy";
 "MyHSSTermsConditions" = "MyHSS Terms & Conditions.";

@@ -78,11 +78,11 @@ class RegisterVC: UIViewController {
         let range1 = (text as NSString).range(of: "PrivacyPolicy".localized)
         underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range1)
         underlineAttriString.addAttribute(NSAttributedString.Key.font, value: fontText, range: range1)
-        underlineAttriString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colors.linkColor, range: range1)
+        underlineAttriString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colors.txtAppDarkColor, range: range1)
         let range2 = (text as NSString).range(of: "MyHSSTermsConditions".localized)
         underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range2)
         underlineAttriString.addAttribute(NSAttributedString.Key.font, value: fontText, range: range2)
-        underlineAttriString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colors.linkColor, range: range2)
+        underlineAttriString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colors.txtAppDarkColor, range: range2)
         lblAgree.attributedText = underlineAttriString
         lblAgree.isUserInteractionEnabled = true
         lblAgree.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
@@ -94,7 +94,7 @@ class RegisterVC: UIViewController {
         let attributedString2 = NSMutableAttributedString.init(string: text2)
         let str2 = NSString(string: text2)
         let theRange3 = str2.range(of: "Login")
-        attributedString2.addAttribute(.foregroundColor, value: Colors.linkColor, range: theRange3)
+        attributedString2.addAttribute(.foregroundColor, value: Colors.txtAppDarkColor, range: theRange3)
         lblAlreadyAcc.attributedText = attributedString2
         
         
@@ -102,7 +102,7 @@ class RegisterVC: UIViewController {
         checkbool = false
         lblUnmHint.text = "U_name_hint_text".localized
         lblPwdHint.text = "PWD_hint_text".localized
-        txtname = createTextField(txtPlaceholder: "full_name".localized, txtfield: txtname, Img: "fullname")
+        txtname = createTextField(txtPlaceholder: "first_name".localized, txtfield: txtname, Img: "fullname")
         txtSname = createTextField(txtPlaceholder: "surname".localized, txtfield: txtSname, Img: "fullname")
         txtunm = createTextField(txtPlaceholder: "username".localized, txtfield: txtunm, Img: "user_img")
         
@@ -141,8 +141,8 @@ class RegisterVC: UIViewController {
             UIApplication.shared.open(url)
         } else {
             print("Tapped none")
-            guard let url = URL(string: PrivacyWebUrl) else { return }
-            UIApplication.shared.open(url)
+//            guard let url = URL(string: PrivacyWebUrl) else { return }
+//            UIApplication.shared.open(url)
         }
     }
     
