@@ -52,7 +52,7 @@ class Login: UIViewController  {
         let attributedString2 = NSMutableAttributedString.init(string: text2)
         let str2 = NSString(string: text2)
         let theRange3 = str2.range(of: "Register!")
-        attributedString2.addAttribute(.foregroundColor, value: Colors.linkColor, range: theRange3)
+        attributedString2.addAttribute(.foregroundColor, value: Colors.txtAppDarkColor, range: theRange3)
         lblRegister.attributedText = attributedString2
         // Do any additional setup after loading the view.
     }
