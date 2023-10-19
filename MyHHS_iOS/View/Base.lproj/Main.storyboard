@@ -315,21 +315,20 @@
                                     <constraint firstItem="Pt2-sV-FiI" firstAttribute="top" secondItem="VPw-Bu-kKW" secondAttribute="bottom" constant="10" id="zsT-Fn-of5"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5uY-9I-F62">
-                                <rect key="frame" x="0.0" y="41" width="414" height="814"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zbs-W3-6x7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJq-if-XMm">
-                                        <rect key="frame" x="2" y="591" width="410" height="223"/>
+                                        <rect key="frame" x="0.0" y="673" width="414" height="223"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Your Password ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ret-Zs-xjB">
-                                                <rect key="frame" x="30" y="15" width="320" height="28"/>
+                                                <rect key="frame" x="30" y="15" width="324" height="28"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="22"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0g2-2q-xGf" customClass="RAGTextField" customModule="RAGTextField">
-                                                <rect key="frame" x="15" y="63" width="380" height="60"/>
+                                                <rect key="frame" x="15" y="63" width="384" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="aAN-3Q-Z0C"/>
                                                 </constraints>
@@ -376,7 +375,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HO-B2-gYy">
-                                                <rect key="frame" x="360" y="15" width="35" height="35"/>
+                                                <rect key="frame" x="364" y="15" width="35" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="38y-wT-jiY"/>
                                                     <constraint firstAttribute="width" constant="35" id="GnD-eb-0qS"/>
@@ -387,7 +386,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWk-6r-6Hd" customClass="SSSpinnerButton" customModule="SSSpinnerButton">
-                                                <rect key="frame" x="95" y="143" width="220" height="50"/>
+                                                <rect key="frame" x="97" y="143" width="220" height="50"/>
                                                 <color key="backgroundColor" red="0.078431372550000003" green="0.1843137255" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="220" id="BxO-hm-tzc"/>
@@ -418,13 +417,11 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <viewLayoutGuide key="safeArea" id="ogD-kQ-IN2"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.70189631379999995" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.70072007337153353" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="hJq-if-XMm" secondAttribute="bottom" id="5kA-5d-fDg"/>
-                                    <constraint firstItem="hJq-if-XMm" firstAttribute="leading" secondItem="5uY-9I-F62" secondAttribute="leading" constant="2" id="AQs-ux-pTU"/>
-                                    <constraint firstAttribute="trailing" secondItem="hJq-if-XMm" secondAttribute="trailing" constant="2" id="D2n-m9-vix"/>
-                                    <constraint firstItem="hJq-if-XMm" firstAttribute="centerX" secondItem="5uY-9I-F62" secondAttribute="centerX" id="l4X-DJ-si4"/>
+                                    <constraint firstItem="hJq-if-XMm" firstAttribute="leading" secondItem="Zbs-W3-6x7" secondAttribute="leading" id="CtE-fB-cBf"/>
+                                    <constraint firstAttribute="trailing" secondItem="hJq-if-XMm" secondAttribute="trailing" id="shI-TF-vCB"/>
+                                    <constraint firstAttribute="bottom" secondItem="hJq-if-XMm" secondAttribute="bottom" id="wQq-MD-fIh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -434,9 +431,13 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MR1-e6-38I" secondAttribute="bottom" id="6Dx-Vv-gSe"/>
                             <constraint firstItem="MR1-e6-38I" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7BQ-mV-mLV"/>
                             <constraint firstItem="Fx4-MN-ooY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ByI-cP-4Wa"/>
+                            <constraint firstAttribute="bottom" secondItem="Zbs-W3-6x7" secondAttribute="bottom" id="Ev8-No-3nt"/>
+                            <constraint firstItem="Zbs-W3-6x7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Kra-ly-7ag"/>
                             <constraint firstItem="Fx4-MN-ooY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qni-Iy-MIM"/>
                             <constraint firstItem="Fx4-MN-ooY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="YOd-YJ-P4B"/>
                             <constraint firstItem="MR1-e6-38I" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bdj-ba-8SK"/>
+                            <constraint firstItem="Zbs-W3-6x7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="r7W-b3-kSA"/>
+                            <constraint firstItem="Zbs-W3-6x7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vp2-Cj-3IH"/>
                             <constraint firstItem="MR1-e6-38I" firstAttribute="top" secondItem="Fx4-MN-ooY" secondAttribute="bottom" id="zbt-g4-GjS"/>
                         </constraints>
                     </view>
@@ -457,7 +458,7 @@
                         <outlet property="txtPwd" destination="bcW-of-DGn" id="mkd-g0-5YY"/>
                         <outlet property="txtUnm" destination="Efl-xx-wDx" id="uKj-fD-6w5"/>
                         <outlet property="viewForgotPWD" destination="hJq-if-XMm" id="Rha-uH-eQF"/>
-                        <outlet property="viewForgotPWDBack" destination="5uY-9I-F62" id="dnl-9X-lqr"/>
+                        <outlet property="viewForgotPWDBack" destination="Zbs-W3-6x7" id="Pon-xf-8He"/>
                         <segue destination="thp-Hh-7y4" kind="show" identifier="showRegiser" id="dS3-CI-HIT"/>
                     </connections>
                 </viewController>
