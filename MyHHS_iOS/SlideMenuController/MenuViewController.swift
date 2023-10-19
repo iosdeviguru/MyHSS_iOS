@@ -175,7 +175,7 @@ extension MenuViewController: SideMenuControllerDelegate {
 
 extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 7
     }
     
     // swiftlint:disable force_cast
@@ -214,20 +214,26 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         //        }
         
         if row == 0 {
+            cell.titleLabel?.text = "Dashboard"
+            cell.imageIcon.image = UIImage(named: "Dashboard")!
+        } else if row == 1 {
+            cell.titleLabel?.text = "Shakha"
+            cell.imageIcon.image = UIImage(named: "Shakha")!
+        } else if row == 2 {
             cell.titleLabel?.text = "khel_app".localized
             cell.imageIcon.image = UIImage(named: "Khel_icon")!
             cell.imageIcon.layer.cornerRadius = 5.0
             cell.imageIcon.layer.masksToBounds = true
-        } else if row == 1 {
+        } else if row == 3 {
             cell.titleLabel?.text = "change_password".localized
             cell.imageIcon.image = UIImage(named: "lock")!
-        } else if row == 2 {
+        } else if row == 4 {
             cell.titleLabel?.text = "change_biometric".localized
             cell.imageIcon.image = UIImage(named: "fingerprint")!
-        } else if row == 3 {
+        } else if row == 5 {
             cell.titleLabel?.text = "policies_name".localized
             cell.imageIcon.image = UIImage(named: "Policies")!
-        } else if row == 4 {
+        } else if row == 6 {
             cell.titleLabel?.text = "logout_name".localized
             cell.imageIcon.image = UIImage(named: "logout")!
         }
@@ -299,7 +305,17 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         //
         //
         //        }
+        
         if row == 0 {
+            
+        } else if row == 1 {
+            let vc = _mainStoryBoard.instantiateViewController(withIdentifier: "MyShakhaVC") as! MyShakhaVC
+            vc.strNavigation = "My Shakha"
+            if ((sideMenuController?.contentViewController as? UINavigationController)?.topViewController?.nibName) != vc.nibName
+            {
+                (sideMenuController?.contentViewController as? UINavigationController)?.pushViewController(vc, animated: true)
+            }
+        } else if row == 2 {
             guard let url = URL(string: "Khel://") else {
                 return
             }
@@ -312,15 +328,15 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
                 vc.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: NSNumber(value: APP.appleID)], completionBlock: nil)
                 present(vc, animated: true)
             }
-        } else if row == 1 {
+        } else if row == 3 {
             let vc = _mainStoryBoard.instantiateViewController(withIdentifier: "ChangePasswordVC") as! ChangePasswordVC
             if ((sideMenuController?.contentViewController as? UINavigationController)?.topViewController?.nibName) != vc.nibName
             {
                 (sideMenuController?.contentViewController as? UINavigationController)?.pushViewController(vc, animated: true)
             }
-        } else if row == 2 {
+        } else if row == 4 {
             self.biometricEnableOrNot()
-        } else if row == 3 {
+        } else if row == 5 {
             
             
             let vc = _mainStoryBoard.instantiateViewController(withIdentifier: "PoliciesVC") as! PoliciesVC
@@ -333,7 +349,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             ////                    vc.strHeader = "isFromWelcome"
             //                    self.navigationController?.pushViewController(vc, animated: true)
             
-        } else if row == 4 {
+        } else if row == 6 {
             let refreshAlert = UIAlertController(title: APP.title, message: "logout_message".localized, preferredStyle: UIAlertController.Style.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "logout_name".localized, style: .default, handler: { (action: UIAlertAction!) in
