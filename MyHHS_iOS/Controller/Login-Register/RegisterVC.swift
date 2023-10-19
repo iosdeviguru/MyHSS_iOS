@@ -12,6 +12,7 @@ import RAGTextField
 import Alamofire
 import NVActivityIndicatorView
 import SSSpinnerButton
+import SwiftyJSON
 
 class RegisterVC: UIViewController {
     var isfromLogin : String!
@@ -213,71 +214,65 @@ class RegisterVC: UIViewController {
         return true
     }
     
-    func Register(){
-        self.view.endEditing(true)
-        var parameters: [String: Any] = [:]
-        parameters["username"] = txtunm.text
-        parameters["first_name"] = txtname.text
-        parameters["last_name"] = txtSname.text
-        parameters["email"] = txtemail.text
-        parameters["password"] = txtPwd.text
-        parameters["device"] = "I"
-        parameters["device_token"] = "dndsjbfskfnksnfdsnfdsn"
-        print(parameters)
+    func Register() {
+        // End editing to dismiss the keyboard
+        view.endEditing(true)
+        
+        var parameters: [String: Any] = [
+            "username": txtunm.text ?? "",
+            "first_name": txtname.text ?? "",
+            "last_name": txtSname.text ?? "",
+            "email": txtemail.text ?? "",
+            "password": txtPwd.text ?? "",
+            "device": "I",
+            "device_token": "dndsjbfskfnksnfdsnfdsn"
+        ]
+        
         APIManager.sharedInstance.callPostApi(url: APIUrl.register, parameters: parameters) { (jsonData, error) in
-            if error == nil
-            {
-                
-                if let status = jsonData!["status"].int
-                {
-                    if status == 1
-                    {
-                        //						_userDefault.save(object: jsonData!["token"].string! , key: "token")
-                        //						_userDefault.save(object: true, key: APP.isLogin)
-                        //print("Toke Userdefault %@",_userDefault.get(key: "token") as! String)
-                        self.btnRigister.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .success, backToDefaults: true, complete: {
-                            // Your code here
-                            self.viewSucessBack.isHidden = false
-                            
-                            //Please check email to verify account.
-                            let text = "Please_check_your_email".localized + "\(self.txtemail.text!) " + "to_verify_your_account".localized
-                            
-                            let email = self.txtemail.text!
-                            let attributedString = NSMutableAttributedString.init(string: text)
-                            let str = NSString(string: text)
-                            let theRange = str.range(of: email)
-                            if #available(iOS 13.0, *) {
-                                attributedString.addAttribute(.foregroundColor, value: UIColor.link, range: theRange)
-                            } else {
-                                // Fallback on earlier versions
-                                attributedString.addAttribute(.foregroundColor, value: UIColor.init(red: 61/255, green: 91/255, blue: 155/255, alpha: 1.0), range: theRange)
-                            }
-                            self.lblSucessMsg.attributedText = attributedString
-                        })
-                    }else {
-                        self.btnRigister.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
-                            // Your code here
-                            if let strError = jsonData!["error"]["username"].string {
-                                showAlert(title: APP.title, message: strError)
-                            } else {
-                                if let strError = jsonData!["message"].string {
-                                    showAlert(title: APP.title, message: strError)
-                                }
-                            }
-                        })
+            if error == nil {
+                if let status = jsonData?["status"].int {
+                    if status == 1 {
+                        // Registration successful
+                        self.handleSuccessfulRegistration()
+                    } else {
+                        self.handleRegistrationFailure(jsonData: jsonData)
                     }
                 }
-//                else {
-//                    self.btnRigister.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
-//                        // Your code here
-//                        if let strError = jsonData!["message"].string {
-//                            showAlert(title: APP.title, message: strError)
-//                        }
-//                    })
-//                }
             }
         }
     }
+
+    func handleSuccessfulRegistration() {
+        btnRigister.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .success, backToDefaults: true, complete: {
+            // Show the success message view
+            self.viewSucessBack.isHidden = false
+            
+            // Customize the success message
+            let email = self.txtemail.text!
+            let text = "Please check your email \(email) to verify your account."
+            
+            // Apply color to the email address
+            let attributedString = NSMutableAttributedString(string: text)
+            if #available(iOS 13.0, *) {
+                attributedString.addAttribute(.foregroundColor, value: Colors.txtAppDarkColor, range: (text as NSString).range(of: email))
+            } else {
+                attributedString.addAttribute(.foregroundColor, value: UIColor(red: 61/255, green: 91/255, blue: 155/255, alpha: 1.0), range: (text as NSString).range(of: email))
+            }
+            self.lblSucessMsg.attributedText = attributedString
+        })
+    }
+
+    func handleRegistrationFailure(jsonData: JSON?) {
+        btnRigister.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
+            // Handle the registration failure
+            if let strError = jsonData!["error"]["username"].string {
+                showAlert(title: APP.title, message: strError)
+            } else if let strError = jsonData?["message"].string {
+                showAlert(title: APP.title, message: strError)
+            }
+        })
+    }
+
     @IBAction func LoginClick(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

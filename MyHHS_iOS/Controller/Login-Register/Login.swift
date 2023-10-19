@@ -14,6 +14,7 @@ import NVActivityIndicatorView
 import SideMenuSwift
 import LocalAuthentication
 import SSSpinnerButton
+import SwiftyJSON
 
 class Login: UIViewController  {
     
@@ -22,7 +23,7 @@ class Login: UIViewController  {
     @IBOutlet var txtUnm: RAGTextField!
     @IBOutlet var txtEmail_PWD: RAGTextField!
     @IBOutlet var lblHead: UILabel!
-    @IBOutlet var btnForgotPwd: SSSpinnerButton!
+    @IBOutlet var btnForgotPwd: UIButton!
     @IBOutlet var btnGmailLogin: UIButton!
     @IBOutlet var btnFBLogin: UIButton!
     @IBOutlet var lblOr: UILabel!
@@ -39,7 +40,7 @@ class Login: UIViewController  {
     @IBOutlet var lblForgotPWD: UILabel!
     
     
-    @IBOutlet weak var btnSubmit_forgotPWD: UIButton!
+    @IBOutlet weak var btnSubmit_forgotPWD: SSSpinnerButton!
     
     override func viewDidLoad() {
         
@@ -198,87 +199,79 @@ class Login: UIViewController  {
         return regex.firstMatch(in: password, options: [], range: range) != nil
     }
 
-    
     func login() {
-        self.view.endEditing(true)
-        var parameters: [String: Any] = [:]
-        parameters["username"] = txtUnm.text
-        parameters["password"] = txtPwd.text
-        parameters["device"] = "I"
-        
-        if _appDelegator.deviceToken != nil {
-            parameters["device_token"] = _appDelegator.deviceToken
+        // End editing to dismiss the keyboard
+        view.endEditing(true)
+
+        // Create a dictionary of parameters
+        var parameters: [String: Any] = [
+            "username": txtUnm.text ?? "",
+            "password": txtPwd.text ?? "",
+            "device": "I"
+        ]
+
+        if let deviceToken = _appDelegator.deviceToken {
+            parameters["device_token"] = deviceToken
+        } else {
+            // Set an empty device token if not available
+            parameters["device_token"] = ""
         }
-        else {
-                        parameters["device_token"] = ""
-            // force getting device token for old device if not getting 
-//            parameters["device_token"] = "dndsjbfskfnksnfdsnfd"
-        }
-        //        parameters["device_token"] = "dndsjbfskfnksnfdsnfd" //  _appDelegator.deviceToken //"dndsjbfskfnksnfdsnfd"
+
         print(parameters)
-        APIManager.sharedInstance.callPostApi(url: APIUrl.login, parameters: parameters) { (jsonData, error) in
-            if error == nil
-            {
-                if let status = jsonData!["status"].int
-                {
-                    if status == 1
-                    {
-                        let dic = jsonData?.dictionaryObject
-                        _userDefault.save(object: dic as Any, key: "user_details")
-                        
-                        _userDefault.save(object: true, key: APP.isLogin)
-                        
-                        setDeviceToken(deviceToken: jsonData!["token"].string ?? "")
-                        print("Toke Userdefault:: ",getDeviceToken() ?? "")
-                        
-                        if let strError = jsonData!["message"].string {
-                            //							showAlert(title: APP.title, message: strError)
-                            if _userDefault.get(key: kDeviceToken) != nil {
-                                self.btnSignIn.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .success, backToDefaults: true, complete: {
-                                    // Your code here
-                                                                    
-                                    let userData = _userDefault.get(key: "user_details") as! Dictionary<String, Any>
-                                    print(userData)
-                                    var fname = ""
-                                    var lname = ""
-                                    if let strFirstName = userData["first_name"] as? String {
-                                        fname = strFirstName
-                                    }
-                                    if let strLastName = userData["last_name"] as? String {
-                                        lname = strLastName
-                                    }
-                                    let passcodeVC = self.storyboard?.instantiateViewController(withIdentifier: "PasscodeView") as! PasscodeView
-                                    passcodeVC.userName = fname  + " " + lname
-                                    passcodeVC.isFromHome = false
-                                    self.navigationController?.pushViewController(passcodeVC, animated: true)
-                                })
-                            }else{
-                                self.btnSignIn.stopAnimate(complete: {
-                                    // Your code here
-                                    self.performSegue(withIdentifier: "Tologin", sender: nil)
-                                })
-                            }
-                        }
-                    }else {
-                        self.btnSignIn.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
-                            // Your code here
-                            if let strError = jsonData!["message"].string {
-                                showAlert(title: APP.title, message: strError)
-                            }
-                        })
+
+        APIManager.sharedInstance.callPostApi(url: APIUrl.login, parameters: parameters) { [weak self] jsonData, error in
+            guard let self = self else { return }
+            if error == nil {
+                if let status = jsonData?["status"].int {
+                    if status == 1 {
+                        self.handleSuccessfulLogin(jsonData: jsonData)
+                    } else {
+                        self.handleLoginFailure(jsonData: jsonData)
                     }
-                }
-                else {
-                    self.btnSignIn.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
-                        // Your code here
-                        if let strError = jsonData!["message"].string {
-                            showAlert(title: APP.title, message: strError)
-                        }
-                    })
                 }
             }
         }
     }
+
+    func handleSuccessfulLogin(jsonData: JSON?) {
+        let dic = jsonData?.dictionaryObject
+        _userDefault.save(object: dic as Any, key: "user_details")
+        _userDefault.save(object: true, key: APP.isLogin)
+        
+        if let token = jsonData?["token"].string {
+            setDeviceToken(deviceToken: token)
+            print("Toke Userdefault: \(getDeviceToken() ?? "")")
+        }
+        
+        if _userDefault.get(key: kDeviceToken) != nil {
+            btnSignIn.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .success, backToDefaults: true, complete: { [weak self] in
+                guard let self = self else { return }
+                let userData = _userDefault.get(key: "user_details") as! [String: Any]
+                print(userData)
+                var fname = userData["first_name"] as? String ?? ""
+                var lname = userData["last_name"] as? String ?? ""
+                let passcodeVC = self.storyboard?.instantiateViewController(withIdentifier: "PasscodeView") as! PasscodeView
+                passcodeVC.userName = fname + " " + lname
+                passcodeVC.isFromHome = false
+                self.navigationController?.pushViewController(passcodeVC, animated: true)
+            })
+        } else {
+            btnSignIn.stopAnimate(complete: { [weak self] in
+                guard let self = self else { return }
+                self.performSegue(withIdentifier: "Tologin", sender: nil)
+            })
+        }
+    }
+
+    func handleLoginFailure(jsonData: JSON?) {
+        btnSignIn.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
+            // Handle the login failure
+            if let strError = jsonData?["message"].string {
+                showAlert(title: APP.title, message: strError)
+            }
+        })
+    }
+
     
     
     @IBAction func onSubmitForgotPasswordClick(_ sender: Any) {
@@ -286,53 +279,53 @@ class Login: UIViewController  {
             showAlert(title: APP.title, message: "error_Please_enter_username".localized)
             return
         }
-        //        btnForgotPwd.startAnimate(spinnerType: SpinnerType.circleStrokeSpin, spinnercolor: .white, spinnerSize: 20, complete: {
-        // Your code here
-        self.forgotPassword()
-        //        })
+        btnSubmit_forgotPWD.startAnimate(spinnerType: SpinnerType.circleStrokeSpin, spinnercolor: .white, spinnerSize: 20, complete: { [weak self] in
+            guard let self = self else { return }
+            self.forgotPassword()
+        })
     }
     
     func forgotPassword() {
-        self.view.endEditing(true)
-        var parameters: [String: Any] = [:]
-        parameters["username"] = txtEmail_PWD.text
+        // End editing to dismiss the keyboard
+        view.endEditing(true)
+    
+        var parameters: [String: Any] = [
+            "username": txtEmail_PWD.text ?? ""
+        ]
+        
         print(parameters)
-        APIManager.sharedInstance.callPostApi(url: APIUrl.forgot_password, parameters: parameters) { [self] (jsonData, error) in
-            if error == nil
-            {
-                if let status = jsonData!["status"].int
-                {
-                    if status == 1
-                    {
-                        //                        self.btnForgotPwd.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .success, backToDefaults: true, complete: {
-                        // Your code here
-                        if let strError = jsonData!["message"].string {
-                            showAlert(title: APP.title, message: strError)
-                            
-                            viewForgotPWDBack.isHidden = true
-                            self.view.endEditing(true)
-                        }
-                        //                        })
-                        
+        
+        APIManager.sharedInstance.callPostApi(url: APIUrl.forgot_password, parameters: parameters) { [weak self] jsonData, error in
+            guard let self = self else { return }
+            if error == nil {
+                if let status = jsonData?["status"].int {
+                    if status == 1 {
+                        self.handlePasswordResetSuccess(jsonData: jsonData)
                     } else {
-                        self.btnForgotPwd.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
-                            // Your code here
-                            if let strError = jsonData!["message"].string {
-                                showAlert(title: APP.title, message: strError)
-                            }
-                        })
+                        self.handlePasswordResetFailure(jsonData: jsonData)
                     }
-                }
-                else {
-                    //                    self.btnForgotPwd.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
-                    // Your code here
-                    if let strError = jsonData!["message"].string {
-                        showAlert(title: APP.title, message: strError)
-                    }
-                    //                    })
+                } else {
+                    self.handlePasswordResetFailure(jsonData: jsonData)
                 }
             }
         }
+    }
+
+    func handlePasswordResetSuccess(jsonData: JSON?) {
+        if let strError = jsonData?["message"].string {
+            showAlert(title: APP.title, message: strError)
+            viewForgotPWDBack.isHidden = true
+            view.endEditing(true)
+        }
+    }
+
+    func handlePasswordResetFailure(jsonData: JSON?) {
+        btnSubmit_forgotPWD.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {
+            // Handle the password reset failure
+            if let strError = jsonData?["message"].string {
+                showAlert(title: APP.title, message: strError)
+            }
+        })
     }
     
     func authenticateUser() {
