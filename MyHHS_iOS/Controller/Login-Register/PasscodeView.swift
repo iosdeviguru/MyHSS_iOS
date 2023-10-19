@@ -50,7 +50,7 @@ class PasscodeView: UIViewController {
         //view.addSubview(titleLabel)
         view.addSubview(pinCodeInputView)
         self.navigationBarDesignForPasscode()
-        self.imgView.image = UIImage(named: "AppIcon")
+        self.imgView.image = UIImage(named: "MyHSS_round")
         self.imgView.cornerRadius = 47
         if self.isFromHome == false {
             self.lblWelcomeMessage.text = self.firstAttemptCreds.count > 0 ? "Verify Passcode" : "Enter Passcode"
@@ -366,15 +366,21 @@ extension PasscodeView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 9 {
             print("logout clicked")
-            _userDefault.delete(key: kDeviceToken)
-            _userDefault.delete(key: kUserInfo)
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyBoard.instantiateViewController(withIdentifier: "Login") as! Login
-            let navigationController = UINavigationController(rootViewController: controller)
-            navigationController.navigationBar.isHidden = true
-            window?.rootViewController = navigationController
-            window?.makeKeyAndVisible()
-            self.firebaseAnalytics(_eventName: "LogoutVC")
+            let YesAction: ((UIAlertAction) -> Void) = { action in
+                _userDefault.delete(key: kDeviceToken)
+                _userDefault.delete(key: kUserInfo)
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyBoard.instantiateViewController(withIdentifier: "Login") as! Login
+                let navigationController = UINavigationController(rootViewController: controller)
+                navigationController.navigationBar.isHidden = true
+                window?.rootViewController = navigationController
+                window?.makeKeyAndVisible()
+                self.firebaseAnalytics(_eventName: "LogoutVC")
+            }
+            let NoAction: ((UIAlertAction) -> Void) = { action in
+                self.dismiss(animated: true)
+            }
+            alertWithAction(title: "", message: "Are you sure you would like to logout?", actionTitles: ["Yes", "No"], actions: [YesAction, NoAction])
         } else if indexPath.item == 11 {
             print("backspace clicked")
             pinCodeInputView.deleteBackward()
@@ -388,5 +394,4 @@ extension PasscodeView: UICollectionViewDelegate, UICollectionViewDataSource, UI
             pinCodeInputView.insertText(selectedNumber)
         }
     }
-    
 }

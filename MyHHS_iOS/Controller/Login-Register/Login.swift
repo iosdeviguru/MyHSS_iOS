@@ -60,7 +60,7 @@ class Login: UIViewController  {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+       // navigationController?.setNavigationBarHidden(false, animated: animated)
         
         //        (sideMenuController?.contentViewController as? UINavigationController)?.pushViewController(vc, animated: true)
         
@@ -247,9 +247,8 @@ class Login: UIViewController  {
             btnSignIn.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .success, backToDefaults: true, complete: { [weak self] in
                 guard let self = self else { return }
                 let userData = _userDefault.get(key: "user_details") as! [String: Any]
-                print(userData)
-                var fname = userData["first_name"] as? String ?? ""
-                var lname = userData["last_name"] as? String ?? ""
+                let fname = userData["first_name"] as? String ?? ""
+                let lname = userData["last_name"] as? String ?? ""
                 let passcodeVC = self.storyboard?.instantiateViewController(withIdentifier: "PasscodeView") as! PasscodeView
                 passcodeVC.userName = fname + " " + lname
                 passcodeVC.isFromHome = false
@@ -289,11 +288,9 @@ class Login: UIViewController  {
         // End editing to dismiss the keyboard
         view.endEditing(true)
     
-        var parameters: [String: Any] = [
+        let parameters: [String: Any] = [
             "username": txtEmail_PWD.text ?? ""
         ]
-        
-        print(parameters)
         
         APIManager.sharedInstance.callPostApi(url: APIUrl.forgot_password, parameters: parameters) { [weak self] jsonData, error in
             guard let self = self else { return }
@@ -312,12 +309,16 @@ class Login: UIViewController  {
     }
 
     func handlePasswordResetSuccess(jsonData: JSON?) {
-        if let strError = jsonData?["message"].string {
-            showAlert(title: APP.title, message: strError)
-            viewForgotPWDBack.isHidden = true
-            view.endEditing(true)
-        }
+        btnSubmit_forgotPWD.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .success, backToDefaults: true, complete: { [weak self] in
+            guard let self = self else { return }
+            if let strError = jsonData?["message"].string {
+                showAlert(title: APP.title, message: strError)
+                viewForgotPWDBack.isHidden = true
+                view.endEditing(true)
+            }
+        })
     }
+                                                                             
 
     func handlePasswordResetFailure(jsonData: JSON?) {
         btnSubmit_forgotPWD.stopAnimationWithCompletionTypeAndBackToDefaults(completionType: .fail, backToDefaults: true, complete: {

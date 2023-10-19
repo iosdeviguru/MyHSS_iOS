@@ -54,7 +54,7 @@ class RegisterVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+      //  navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,7 +218,7 @@ class RegisterVC: UIViewController {
         // End editing to dismiss the keyboard
         view.endEditing(true)
         
-        var parameters: [String: Any] = [
+        let parameters: [String: Any] = [
             "username": txtunm.text ?? "",
             "first_name": txtname.text ?? "",
             "last_name": txtSname.text ?? "",
